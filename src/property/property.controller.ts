@@ -1,7 +1,8 @@
 import { Controller, Get, Post, Param, Body, HttpCode, ParseIntPipe,Query, ParseBoolPipe, UsePipes, ValidationPipe, Patch } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/createProperty.dto';
 import { ParseIdPipe } from './pipes/parseIdpipe';
-
+import { ZodValidationPipe } from './pipes/zodValidationPipe';
+import { createPropertySchema, CreatePropertyZodDto } from './dto/createPropertyZod.dto';
 @Controller('property')
 export class PropertyController {
     @Get()
@@ -24,7 +25,8 @@ export class PropertyController {
     }
 
     @Post()
-    create(@Body()body:CreatePropertyDto) {
+    @UsePipes(new ZodValidationPipe(createPropertySchema))
+    create(@Body()body:CreatePropertyZodDto) {
         return body;
     }
 
