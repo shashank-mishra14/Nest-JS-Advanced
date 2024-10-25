@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Param, Body, HttpCode, ParseIntPipe,Query, ParseBoolPipe } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, HttpCode, ParseIntPipe,Query, ParseBoolPipe, UsePipes, ValidationPipe } from '@nestjs/common';
+import { CreatePropertyDto } from './dto/createProperty.dto';
 
 
 @Controller('property')
@@ -22,9 +23,9 @@ export class PropertyController {
         return id;
     }
 
-    @Post("hehe")
-    @HttpCode(202)
-    create(@Body('test') test) {
+    @Post()
+    @UsePipes(new ValidationPipe())
+    create(@Body() body:CreatePropertyDto) {
         return test;
     }
 }
