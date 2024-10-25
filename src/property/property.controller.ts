@@ -24,8 +24,7 @@ export class PropertyController {
     }
 
     @Post()
-    @UsePipes(new ValidationPipe())
-    create(@Body() body:CreatePropertyDto) {
-        return test;
+    create(@Body(new ValidationPipe({whitelist: true,forbidNonWhitelisted: true})) body:CreatePropertyDto) {
+        return body;
     }
 }
