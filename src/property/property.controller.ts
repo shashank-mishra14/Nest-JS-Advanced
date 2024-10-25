@@ -24,12 +24,12 @@ export class PropertyController {
     }
 
     @Post()
-    create(@Body(new ValidationPipe({whitelist: true,forbidNonWhitelisted: true})) body:CreatePropertyDto) {
+    create(@Body()body:CreatePropertyDto) {
         return body;
     }
 
     @Patch(":id")
-    update(@Body(new ValidationPipe({whitelist: true,forbidNonWhitelisted: true})) body:CreatePropertyDto) {
+    update(@Body() body:CreatePropertyDto) {
         return body;
     }
 }
