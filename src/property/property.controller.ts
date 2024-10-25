@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Body, HttpCode, ParseIntPipe,Query, ParseBoolPipe, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Param, Body, HttpCode, ParseIntPipe,Query, ParseBoolPipe, UsePipes, ValidationPipe, Patch } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/createProperty.dto';
 
 
@@ -25,6 +25,11 @@ export class PropertyController {
 
     @Post()
     create(@Body(new ValidationPipe({whitelist: true,forbidNonWhitelisted: true})) body:CreatePropertyDto) {
+        return body;
+    }
+
+    @Patch(":id")
+    update(@Body(new ValidationPipe({whitelist: true,forbidNonWhitelisted: true})) body:CreatePropertyDto) {
         return body;
     }
 }
