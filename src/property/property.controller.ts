@@ -5,11 +5,16 @@ import { ZodValidationPipe } from './pipes/zodValidationPipe';
 import { createPropertySchema, CreatePropertyZodDto } from './dto/createPropertyZod.dto';
 import { HeadersDto } from './dto/headers.dto';
 import { RequestHeader } from './pipes/request-header';
+import { PropertyService } from './property.service';
+
 @Controller('property')
 export class PropertyController {
+
+    constructor(private propertyService: PropertyService) {}
+
     @Get()
     findAll() {
-        return "all properties";
+        return this.propertyService.findAll();
     }
 
 
@@ -23,13 +28,13 @@ export class PropertyController {
     findOne(@Param("id", ParseIntPipe) id, @Query('test', ParseBoolPipe) test) {
         console.log(typeof id)
         console.log(typeof test);;
-        return id;
+        return this.propertyService.findOne(id);
     }
 
     @Post()
     @UsePipes(new ZodValidationPipe(createPropertySchema))
     create(@Body() body: CreatePropertyZodDto) {
-        return body;
+        return this.propertyService.create();
     }
 
     @Patch(":id")
@@ -39,6 +44,6 @@ export class PropertyController {
         @Body() body: CreatePropertyDto,
         @RequestHeader(new ValidationPipe({whitelist:true, validateCustomDecorators:true})) header:HeadersDto 
     ) {
-        return header;
+        return this.propertyService.update();
     }
 }
