@@ -1,4 +1,4 @@
-import { Entity,Column, PrimaryGeneratedColumn, OneToOne, OneToMany, ManyToOne, JoinColumn } from "typeorm";
+import { Entity,Column, PrimaryGeneratedColumn, OneToOne, ManyToMany, ManyToOne, JoinColumn } from "typeorm";
 import { PropertyFeature } from "./propertyFeature.entity";
 import { User } from "./user.entity";
 
@@ -24,4 +24,7 @@ export class Property{
     @ManyToOne(()=>User, (user) => user.properties)
     @JoinColumn({name:'ownerId'})
     user:User
+
+    @ManyToMany(()=>User, (user) => user.likedProperties)
+    likedBy:User[]
 }

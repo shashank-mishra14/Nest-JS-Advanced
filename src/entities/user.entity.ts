@@ -47,9 +47,9 @@ import {
     @OneToMany(() => Property, (property) => property.user)
     properties: Property[];
   
-    // @ManyToMany(() => Property, (property) => property.likedBy)
-    // @JoinTable({ name: 'user_liked_properties' })
-    // likedProperties: Property[];
+    @ManyToMany(() => Property, (property) => property.likedBy)
+    @JoinTable({ name: 'user_liked_properties' })
+    likedProperties: Property[];
   
     // @BeforeInsert()
     // async hashPassword() {
