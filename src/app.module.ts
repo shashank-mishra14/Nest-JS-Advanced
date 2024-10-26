@@ -4,8 +4,14 @@ import { AppService } from './app.service';
 import { PropertyModule } from './property/property.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { pgConfig } from 'src/config/dbConfig';
+import { ConfigModule } from '@nestjs/config';
 @Module({
-  imports: [PropertyModule, TypeOrmModule.forRoot(pgConfig)],
+  imports: [ConfigModule.forRoot({
+
+    isGlobal: true,
+    expandVariables: true,
+  }),
+    PropertyModule, TypeOrmModule.forRoot(pgConfig)],
   controllers: [AppController],
   providers: [AppService],
 })
