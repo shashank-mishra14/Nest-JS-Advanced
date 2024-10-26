@@ -10,5 +10,5 @@ export class CreatePropertyDto{
     description:string;
 
     @IsInt()
-    area:number;
+    price:number;
 }

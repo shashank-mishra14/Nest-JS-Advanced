@@ -25,16 +25,14 @@ export class PropertyController {
     // }
 
     @Get(':id')
-    findOne(@Param("id", ParseIntPipe) id, @Query('test', ParseBoolPipe) test) {
-        console.log(typeof id)
-        console.log(typeof test);;
+    findOne(@Param("id", ParseIntPipe) id) {
         return this.propertyService.findOne(id);
     }
 
     @Post()
-    @UsePipes(new ZodValidationPipe(createPropertySchema))
-    create(@Body() body: CreatePropertyZodDto) {
-        return this.propertyService.create();
+    // @UsePipes(new ZodValidationPipe(createPropertySchema))
+    create(@Body() dto: CreatePropertyDto) {
+        return this.propertyService.create(dto);
     }
 
     @Patch(":id")
