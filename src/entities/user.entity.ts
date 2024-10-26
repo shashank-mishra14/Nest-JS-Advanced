@@ -34,13 +34,6 @@ import {
     @Column()
     password: string;
   
-    // @Column({
-    //   type: 'enum',
-    //   enum: Role,
-    //   default: Role.USER,
-    // })
-    // role: Role;
-  
     @Column({ nullable: true })
     hashedRefreshToken: string;
   
@@ -50,9 +43,4 @@ import {
     @ManyToMany(() => Property, (property) => property.likedBy)
     @JoinTable({ name: 'user_liked_properties' })
     likedProperties: Property[];
-  
-    // @BeforeInsert()
-    // async hashPassword() {
-    //   this.password = await bcrypt.hash(this.password, 10);
-    // }
   }
